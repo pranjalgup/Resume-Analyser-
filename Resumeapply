@@ -1,0 +1,82 @@
+from resumeextractionfnc import ResumeFunctions
+from pdfminer.high_level import extract_text
+
+# Instantiate the class
+resume_handler = ResumeFunctions()
+
+# Assuming you already have 'extracted_text' defined
+# (e.g., extracted_text = resume_handler.extract_text_from_pdf("/path/to/pdf_file.pdf"))
+def extract_text_from_pdf(file_path):
+    
+        text = extract_text(file_path)
+        return text
+
+    # Example usage: Extract text from a PDF file
+pdf_file_path = "/home/pranjal/Downloads/PRANJALRESUMEIB.pdf"
+extracted_text = extract_text_from_pdf(pdf_file_path)
+print(extracted_text)
+
+if not isinstance(extracted_text, str):
+    print("Error: extracted_text is not a valid string.")
+else:
+# Extract and print Name
+
+    name = resume_handler.extract_name(extracted_text)
+    if name:
+        print("Name:", name)
+    else:
+        print("Name not found")
+
+    # Extract and print Contact Number
+    contact_number = resume_handler.extract_mobile_number(extracted_text)
+    if contact_number:
+        print("Contact Number:", contact_number)
+    else:
+        print("Contact Number not found")
+
+    # Extract and print Email
+    email = resume_handler.extract_email(extracted_text)
+    if email:
+        print("Email:", email)
+    else:
+        print("Email not found")
+
+    # Extract and print Education
+    extracted_education = resume_handler.extract_education(extracted_text)
+    if extracted_education:
+        print("Education:", extracted_education)
+    else:
+        print("No education information found")
+
+    # Extract and print degree
+    education_degrees = resume_handler.extract_degree(extracted_text)
+    if education_degrees:
+        print("Degree:", education_degrees)
+    else:
+        print("No Degree information found")
+
+    # Extract Location
+    location = resume_handler.extract_location(extracted_text)
+    print("Location:", location)
+
+    # Extract work exp
+    work_experience = resume_handler.extract_work_experiences(extracted_text)
+    print("Work Experience:", work_experience)
+
+    # Extract and print skills from the input sentence
+    skills_list = ['skill1', 'skill2', 'skill3']  # Replace with your actual skills list
+    extracted_skills = resume_handler.extract_skills(extracted_text, skills_list)
+    if extracted_skills:
+        print("Skills:", extracted_skills)
+    else:
+        print("No skills found in the sentence.")
+
+    # Extract projects
+    projects = resume_handler.extract_projects(extracted_text)
+    if projects:
+        print("Projects:\n", projects)
+    else:
+        print("Projects not found")
+
+    # You can use the %time magic command here if you want to measure the execution time
+    # %time ...
